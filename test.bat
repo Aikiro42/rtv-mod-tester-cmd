@@ -26,7 +26,7 @@ if exist "%ModDir%" (
         del "%ZipFile%"
 
         :: start the game with the mod installed; game shows logs in console
-        "%GameDir%\Public_Demo_2_v2.exe" --main-pack "%GameDir%\mod-injector.pck"
+        "%GameDir%\Public_Demo_2_v2.exe" --main-pack "%GameDir%\Injector.pck"
     )
 ) else (
     
