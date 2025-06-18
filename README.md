@@ -1,5 +1,5 @@
 # rtv-mod-tester-cmd
-Batch file for easier mod testing on steam. Requires 7-zip, [Ryhon0's Mod Injector](https://github.com/Ryhon0/VostokMods).
+Batch script written to test Road to Vostok mods easily. Requires 7-zip, [Ryhon0's Mod Injector](https://github.com/Ryhon0/VostokMods).
 
 # Usage
 Place the `.bat` file into the folder of the mod you're developing and run it. 
