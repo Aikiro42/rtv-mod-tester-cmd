@@ -23,11 +23,11 @@ if not exist "%ZipFile%" (
 
 :: find game folder
 set "GameDir=C:\Program Files (x86)\Steam\steamapps\common\Road to Vostok Demo"
-if not exist %GameDir% set "GameDir=D:\SteamLibrary\steamapps\common\Road to Vostok Demo"
-if not exist %GameDir% (
-    echo Failed to find game folder.
-    echo Please edit this batch file so that it finds it.
-    echo Terminating.
+if not exist "%GameDir%" set "GameDir=D:\SteamLibrary\steamapps\common\Road to Vostok Demo"
+if not exist "%GameDir%" (
+    echo !!! ERROR: Failed to find game folder.
+    echo !!! Please edit this batch file so that it finds it.
+    echo !!! Terminating.
     pause
     exit
 ) else (
