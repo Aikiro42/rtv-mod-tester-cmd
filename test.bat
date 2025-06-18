@@ -14,7 +14,8 @@ if exist "%ZipFile%" del "%ZipFile%"
 7z a -tzip "%ZipFile%" * -xr!%ZipFile%
 
 :: copy zip file to game mods folder
-set "GameDir=D:\SteamLibrary\steamapps\common\Road to Vostok Demo"
+set "GameDir=C:\Program Files (x86)\Steam\steamapps\common\Road to Vostok Demo"
+if not exist %GameDir% set "GameDir=D:\SteamLibrary\steamapps\common\Road to Vostok Demo"
 set "ModDir=%GameDir%\mods"
 if exist "%ModDir%" (
     if exist "%ZipFile%" (
