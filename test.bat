@@ -16,24 +16,20 @@ if exist "%ZipFile%" del "%ZipFile%"
 :: copy zip file to game mods folder
 set "GameDir=C:\Program Files (x86)\Steam\steamapps\common\Road to Vostok Demo"
 if not exist %GameDir% set "GameDir=D:\SteamLibrary\steamapps\common\Road to Vostok Demo"
-set "ModDir=%GameDir%\mods"
-if exist "%ModDir%" (
-    if exist "%ZipFile%" (
-
-        copy /Y "%ZipFile%" "%TargetDir%\"~
-        echo Zip copied to %TargetDir%
-
-        :: delete transferred zip file
-        del "%ZipFile%"
-
-        :: start the game with the mod installed; game shows logs in console
-        "%GameDir%\Public_Demo_2_v2.exe" --main-pack "%GameDir%\Injector.pck"
+if exist %GameDir% (
+    set "ModDir=%GameDir%\mods"
+    if exist "%ModDir%" (
+        if exist "%ZipFile%" (
+            copy /Y "%ZipFile%" "%TargetDir%\"~
+            echo Zip copied to %TargetDir%
+            :: delete transferred zip file
+            del "%ZipFile%"
+            :: start the game with the mod installed; game shows logs in console
+            "%GameDir%\Public_Demo_2_v2.exe" --main-pack "%GameDir%\Injector.pck"
+        )
+    ) else (
+        echo Target directory not found: %ModDir%
+        :: delete zip file
+        if exist "%ZipFile%" del "%ZipFile%"
     )
-) else (
-    
-    echo Target directory not found: %ModDir%
-
-    :: delete zip file
-    if exist "%ZipFile%" del "%ZipFile%"
-
 )
