@@ -42,7 +42,7 @@ if not exist "%ModDir%" (
 )
 
 :: move zip file to mod dir
-copy /Y "%ZipFile%" "%TargetDir%\"~
+copy /Y "%ZipFile%" "%ModDir%\"
 del "%ZipFile%"
 
 echo Mod zip file moved to mods folder: %TargetDir%
