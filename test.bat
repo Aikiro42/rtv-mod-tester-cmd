@@ -34,6 +34,13 @@ if not exist "%GameDir%" (
     echo Found game folder.
 )
 
+:: Prompt if mod is to be tested; otherwise, zip file stays in mod folder
+:: for easy uploading to modworkshop
+set /P c=Enter [G/g] to open the game and test the mod: 
+if /I "%c%" NEQ "G" (
+    if /I "%c%" NEQ "g" exit 0
+)
+
 :: find mods folder
 set "ModDir=%GameDir%\mods"
 if not exist "%ModDir%" (
