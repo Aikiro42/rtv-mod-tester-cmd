@@ -10,26 +10,43 @@ set ZipFile=%FolderName%.zip
 :: delete existing zip file
 if exist "%ZipFile%" del "%ZipFile%"
 
-:: compress folder contents to zip file
+:: attempt to compress folder contents to zip file (requires 7zip)
 7z a -tzip "%ZipFile%" * -xr!%ZipFile%
 
-:: copy zip file to game mods folder
+if not exist "%ZipFile%" (
+    echo Mod failed to zip. Terminating.
+    pause
+    exit
+) else (
+    echo Mod zipped successfully.
+)
+
+:: find game folder
 set "GameDir=C:\Program Files (x86)\Steam\steamapps\common\Road to Vostok Demo"
 if not exist %GameDir% set "GameDir=D:\SteamLibrary\steamapps\common\Road to Vostok Demo"
-if exist %GameDir% (
-    set "ModDir=%GameDir%\mods"
-    if exist "%ModDir%" (
-        if exist "%ZipFile%" (
-            copy /Y "%ZipFile%" "%TargetDir%\"~
-            echo Zip copied to %TargetDir%
-            :: delete transferred zip file
-            del "%ZipFile%"
-            :: start the game with the mod installed; game shows logs in console
-            "%GameDir%\Public_Demo_2_v2.exe" --main-pack "%GameDir%\Injector.pck"
-        )
-    ) else (
-        echo Target directory not found: %ModDir%
-        :: delete zip file
-        if exist "%ZipFile%" del "%ZipFile%"
-    )
+if not exist %GameDir% (
+    echo Failed to find game folder.
+    echo Please edit this batch file so that it finds it.
+    echo Terminating.
+    pause
+    exit
+) else (
+    echo Found game folder.
 )
+
+:: find mods folder
+set "ModDir=%GameDir%\mods"
+if not exist "%ModDir%" (
+    echo Creating mods folder...
+    mkdir "%ModDir%"
+)
+
+:: move zip file to mod dir
+copy /Y "%ZipFile%" "%TargetDir%\"~
+del "%ZipFile%"
+
+echo Mod zip file moved to mods folder: %TargetDir%
+
+:: start the game with the mod installed; game shows logs in console
+echo Starting game...
+"%GameDir%\Public_Demo_2_v2.exe" --main-pack "%GameDir%\Injector.pck"
